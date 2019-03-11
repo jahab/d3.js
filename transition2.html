@@ -47,8 +47,13 @@
             d3.select("p")
                 .on("click",function()
                         {
-                            dataset = [ 11, 12, 15, 20, 18, 17, 16, 18, 23, 25,
-                                        5, 10, 13, 19, 21, 25, 22, 18, 15, 13 ];
+                            var numValues=dataset.length;
+                            dataset = [];
+                            for (var i=0;i<numValues;i++)
+                            {
+                                var newNumber= Math.floor(Math.random()*25);
+                                dataset.push(newNumber);
+                            }
                             svg.selectAll("rect")
                                 .data(dataset)
                                 .transition()
@@ -58,7 +63,7 @@
                                 .attr("y",function(d){return h-d*10;})
                                 .attr("height",function(d){return d*10;})
                                 .attr("fill", function(d) { // <-- Down here!
-                                       return "rgb(0, 0, " + (d * 10) + ")";
+                                       return "rgb(100, 0, " + (d * 10) + ")";
 
 
                    });
