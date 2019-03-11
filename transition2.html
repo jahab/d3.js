@@ -1,0 +1,67 @@
+<HTML lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Transition plot2 in D3 </title>
+        <script type="text/javascript" src="d3/d3.js"></script>
+        <style type ="text/CSS">
+            div.Bar
+            {
+                display: inline-block;
+                width: 20px;
+                height: 75px;
+                background-color: teal;
+                margin-right: px;
+            }
+        </style>
+
+
+    </head>
+
+    <body>
+        <p>Click on this text to update the chart with new data values (once).</p>
+        <script type="text/javascript">
+            var h=400;
+            var w=500;
+            var padding=5;
+            var dataset=[5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+                        11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
+            console.log(dataset);
+            var svg =d3.select("body")
+                        .append("svg")
+                        .attr("height",h)
+                        .attr("width",w);
+
+            svg.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x",function(d,i){return 5 + (i*w/dataset.length);})
+                .attr("y", function(d) {return h-d*10;})
+                .attr("width", w / dataset.length-padding)
+                .attr("height", function(d){return d*10;})
+                .attr("fill", function(j)
+                                {
+                                    return "rgba(150, 122, 256,"+ j/d3.max(dataset) + ")"
+                                });
+
+            d3.select("p")
+                .on("click",function()
+                        {
+                            dataset = [ 11, 12, 15, 20, 18, 17, 16, 18, 23, 25,
+                                        5, 10, 13, 19, 21, 25, 22, 18, 15, 13 ];
+                            svg.selectAll("rect")
+                                .data(dataset)
+                                .attr("y",function(d){return h-d*10;})
+                               .attr("height",function(d){return d*10;})
+                               .attr("fill", function(d) { // <-- Down here!
+                                       return "rgb(0, 0, " + (d * 10) + ")";
+
+
+                   });
+
+                });
+
+        </script>
+    </body>
+
+</HTML>
