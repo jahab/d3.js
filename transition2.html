@@ -51,9 +51,13 @@
                                         5, 10, 13, 19, 21, 25, 22, 18, 15, 13 ];
                             svg.selectAll("rect")
                                 .data(dataset)
+                                .transition()
+                                .ease(d3.easeBounce)
+                                .duration(2000)
+
                                 .attr("y",function(d){return h-d*10;})
-                               .attr("height",function(d){return d*10;})
-                               .attr("fill", function(d) { // <-- Down here!
+                                .attr("height",function(d){return d*10;})
+                                .attr("fill", function(d) { // <-- Down here!
                                        return "rgb(0, 0, " + (d * 10) + ")";
 
 
